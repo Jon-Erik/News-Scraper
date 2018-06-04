@@ -5,7 +5,9 @@ var exphbs = require('express-handlebars');
 var mongoose = require('mongoose');
 var MONGODB_URI = process.env.MONGODB_URI || "mongodb://127.0.0.1/mongoHeadlines";
 var cheerio = require('cheerio');
-var request = require('request')
+var request = require('request');
+
+var db = require("./models");
 
 //initialize express
 var app = express();

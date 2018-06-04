@@ -1,2 +1,55 @@
-<p>Welcome to news scraper</p>
-<p>{{scrape}}</p>
+  <nav class="navbar navbar-expand-lg navbar-light">
+    <a class="navbar-brand" href="/">National Catholic Register News Scraper</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/saved">Saved Articles</a>
+        </li>
+        <li class="nav-item">
+         	<button href="" id="scrape-news" class="btn">Scrape news</button>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="main-title">
+    <div class="title-info">
+      <div class="title-wrapper">
+        <h1 class="text-center title-text">Mongo News Scraper</h1>
+        <h1 class="text-center main-lead">NC Register Edition</h1>
+      </div>
+    </div>
+  </div>
+
+  <div class="articles">
+    {{#unless articles}}
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title alt-title">No articles found!</h5>
+        <p class="card-text">Sorry, no articles scraped yet. Click scrape in the menu to find some new articles!</p>
+      </div>
+    </div>
+    {{/unless}}
+
+    {{#each articles}}
+    <div class="card">
+      <div class="card-body">
+        <a href="{{URL}}"><h5 class="card-title">{{headline}}</h5></a>
+        <p class="card-text">{{summary}}</p>
+        <a href="#" class="btn" data-id="{{_id}}">Save Article</a>
+        <!-- <a href="#" class="btn">Delete from Saved</a>
+        <a href="#" class="btn">Article Notes</a> -->
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+  <footer>
+    <p class="text-center">Original articles can be found <a href="https://www.ncregister.com">here</a></p>
+  </footer>

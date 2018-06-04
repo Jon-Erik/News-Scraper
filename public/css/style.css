@@ -1,3 +1,135 @@
-h1 {
-	color: green;
+nav.navbar {
+	background-color: #8ab5cc;
+	color: white;
 }
+
+a.navbar-brand.nav-link {
+	padding-left: 0;
+}
+
+.nav-link, .navbar-brand {
+	color: white !important;
+	font-family: 'Libre Baskerville', serif;
+}
+
+.nav-link:hover, .navbar-brand:hover {
+	color: #323675 !important;
+	text-decoration: none;
+}
+
+.list-link a {
+	display: inline;
+}
+
+.list-link {
+	display: inline
+}
+
+.btn {
+	background-color: #FF0000;
+}
+
+.title-link {
+	font-family: 'Gentium Basic', serif;
+	color: white;
+}
+
+.main-title {
+	background-image: url("../images/st-peters.jpg");
+	width: 100%;
+	height: 400px;
+	background-size: cover;
+	background-position: center bottom;
+	position: relative;
+}
+
+.title-text, .main-lead {
+	font-family: 'Gentium Basic', serif;
+}
+
+.title-text {
+	font-size: 58px;
+	font-weight: bold;
+	color: #204f54;
+}
+
+.main-lead {
+	color: #204f54;
+}
+
+.title-wrapper {
+	background: rgba(255, 255, 255, 0.75);
+	margin: 0 12.5% 0 12.5%;
+
+}
+
+.title-info {
+	position: absolute;
+	left: 0;
+	top: 115px;
+	width: 100%;
+	text-align: center;
+}
+
+.card {
+	margin: 15px;
+	border-radius: 0 !important;
+	border: 2px solid #204f54 !important;
+}
+
+h5.alt-title {
+	font-family: 'Gentium Basic', serif;
+	font-size: 30px;
+}
+
+.card-body a, .nav-item .btn {
+	color: white;
+	background-color: #204f54;
+	font-family: 'Libre Baskerville', serif;
+}
+
+.card-body a:hover, .nav-item .btn:hover {
+	color: #8ab5cc;
+	background-color: #204f54;
+	font-family: 'Libre Baskerville', serif;
+}
+
+a h5.card-title, .card-text {
+	font-family: 'Gentium Basic', serif;
+}
+
+a h5.card-title {
+	font-weight: bold;
+	font-size: 30px;
+	color: black;
+}
+
+div.card-body a.btn {
+	color: white;
+}
+
+a.btn:hover {
+	background-color: #204f54;
+}
+
+.card-text {
+	font-size: 20px;
+}
+
+footer {
+	background-color: #8ab5cc;
+	color: white;
+	font-family: 'Libre Baskerville', serif;
+}
+
+footer p {
+	margin-bottom: 0;
+	margin-top: 5px;
+	padding: 10px;
+}
+
+footer p a:hover {
+ 	text-decoration: none;
+}
+/*font-family: 'Libre Baskerville', serif;
+font-family: 'Gentium Basic', serif;*/
