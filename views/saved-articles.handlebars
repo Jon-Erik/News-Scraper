@@ -1,3 +1,4 @@
+  <!--Nav Bar-->
   <nav class="navbar navbar-expand-lg navbar-light">
     <a class="navbar-brand" href="/">National Catholic Register News Scraper</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -11,27 +12,75 @@
         <li class="nav-item">
           <a class="nav-link" href="/saved">Saved Articles</a>
         </li>
+        <li class="nav-item">
+          <button href="" id="scrape-news" class="btn">Scrape news</button>
+        </li>
       </ul>
     </div>
   </nav>
 
+  <!--Main Title-->
   <div class="main-title">
     <div class="title-info">
       <div class="title-wrapper">
-        <h1 class="text-center title-text">Mongo News Scraper</h1>
-        <h1 class="text-center main-lead">Saved Articles</h1>
+        <h1 class="text-center title-text">Saved Articles</h1>
+        <h1 class="text-center main-lead">Find and comment on saved articles here</h1>
+      </div>
+    </div>
+  </div>
+  
+  <div class="articles">
+    <!--Message if no articles in db-->
+    {{#unless articles}}
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title alt-title">No articles found!</h5>
+        <p class="card-text">Sorry, no articles have been saved yet. Save by clicking the save button for articles on the homepage.</p>
+      </div>
+    </div>
+    {{/unless}}
+
+    <!--Format for each article in db-->
+    {{#each articles}}
+    <div class="card">
+      <div class="card-body">
+        <a href="{{URL}}"><h5 class="card-title">{{headline}}</h5></a>
+        <p class="card-text">{{summary}}</p>
+        <a class="btn delete-saved" data-id="{{_id}}">Delete from Saved</a>
+        <a class="btn view-notes" data-id="{{_id}}">Article Notes</a>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+
+  <!--Modal to appear to view and add notes-->
+  <div class="modal" tabindex="-1" role="dialog" id="notes-modal">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title notes-modal-title">Notes for article "<span class="article-notes-title"></span>"</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <ul class="notes-container">
+            
+          </ul> 
+          <div class="notes-list">
+            <p>Add a new note below:</p>
+            <textarea rows="4" class="new-note-body"></textarea>
+
+          </div>        
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary close-scrape-modal add-note">Add note</button>
+          <button type="button" class="btn btn-secondary close-scrape-modal" data-dismiss="modal">Close</button>
+        </div>
       </div>
     </div>
   </div>
 
-  <div class="articles">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Headline</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <!-- <a href="#" class="btn">Save Article</a> -->
-        <a href="#" class="btn">Delete from Saved</a>
-        <a href="#" class="btn">Article Notes</a>
-      </div>
-    </div>
-  </div>
+  <footer>
+    <p class="text-center">Original articles can be found <a href="https://www.ncregister.com">here</a></p>
+  </footer>

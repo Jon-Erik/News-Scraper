@@ -108,12 +108,42 @@ div.card-body a.btn {
 	color: white;
 }
 
-a.btn:hover {
-	background-color: #204f54;
-}
-
 .card-text {
 	font-size: 20px;
+}
+
+div.modal-content {
+	border: 2px solid black;
+	border-radius: 0 !important;
+}
+
+h5.modal-title {
+	font-family: 'Gentium Basic', serif;
+	font-weight: bold;
+	font-size: 30px;
+}
+
+div.modal-body p {
+	font-family: 'Libre Baskerville', serif;
+}
+
+div.modal-header {
+	border-bottom: 0;
+}
+
+div.modal-footer {
+	border-top: 0;
+}
+
+button.close-scrape-modal {
+	background-color: #204f54;
+	border: 0;
+	font-family: 'Libre Baskerville', serif;
+}
+
+button.close-scrape-modal:hover, .save-btn:hover {
+	background-color: #204f54;
+	color: #8ab5cc !important;
 }
 
 footer {
@@ -133,3 +163,7 @@ footer p a:hover {
 }
 /*font-family: 'Libre Baskerville', serif;
 font-family: 'Gentium Basic', serif;*/
+
+textarea.new-note-body {
+	width: 100%;
+}
