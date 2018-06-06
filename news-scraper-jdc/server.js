@@ -36,7 +36,7 @@ if (process.env.MONGODB_URI) {
 }
 
 //initialize mongoose mongoDB connection
-mongoose.connect(databaseUri);
+//mongoose.connect(databaseUri);
 var db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function() {
