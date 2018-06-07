@@ -1,16 +1,13 @@
 var cheerio = require("cheerio");
 var request = require("request");
 var db = require("../models");
-// router.get('/', function (req, res) {
-//   res.send('Birds home page')
-// })
 
 module.exports = function(app) {
 
+	//route for display all articles in the database
 	app.get("/", function(req, res) {
 			db.Article.find({})
-			.then(function(dbArticles){
-				//res.send(dbArticles);
+			.then(function(dbArticles) {
 				res.render("home", {articles: dbArticles});
 			})
 	});
@@ -18,11 +15,11 @@ module.exports = function(app) {
 	app.get("/saved", function(req, res) {
 	  	db.Article.find({saved: true})
 			.then(function(dbArticles){
-				//res.send(dbArticles);
 				res.render("saved-articles", {articles: dbArticles});
 			})
 	});
 
+	//route for scraping news site and adding more articles to Mongo database
 	app.get("/scrape", function(req, res) {
 
 		request("https://www.ncregister.com", function(error, response, html) {
@@ -72,7 +69,7 @@ module.exports = function(app) {
 		});
 	});
 
-
+	//route for marking article as saved
 	app.put("/save/:id", function(req, res) {
 		var articleId = req.params.id;
 
@@ -94,9 +91,12 @@ module.exports = function(app) {
 			});
 	});
 
+	//route for deleting article from saved articles, along with deleting any notes and their
+	//the article's association with any notes. Unsaved articles remain in the database
 	app.put("/delete/:id", function(req, res) {
 		var articleId = req.params.id;
 
+		//find all the notes ids associated with an article
 		db.Article.find({_id: articleId})
 		.then(function(result) {
 			var noteIds = []
@@ -104,9 +104,11 @@ module.exports = function(app) {
 				noteIds.push(result[0].notes[i]);
 			}
 			
+			//delete all notes with the the ids found just above
 			db.Note.remove({_id: {$in: noteIds}})
 			.then(function(result) {
 				
+				//mark article as unsaved and update associated notes to an empty array
 				db.Article.update({_id: articleId}, {$set: {saved: false, notes: []}})
 				.then(function(result) {
 					console.log("article marked unsaved/deleted, notes and their references deleted")
@@ -125,6 +127,7 @@ module.exports = function(app) {
 		});
 	});
 
+	//route for getting the notes associated with an article
 	app.get("/notes/:id", function(req, res) {
 		var articleId = req.params.id;
 
@@ -138,12 +141,12 @@ module.exports = function(app) {
 			});
 	});
 
+	//route for saving a new note and associating it with the correct article
 	app.post("/save-note/:id", function(req, res) {
 		var articleId = req.params.id;
 
 		var newNote = req.body;
-
-		console.log(newNote.note);
+		//console.log(newNote.note);
 
 		db.Note.create({body: newNote.note})
 		.then(function(dbNote) {
@@ -155,14 +158,17 @@ module.exports = function(app) {
 		});
 	});
 
+	//route for deleting a note
 	app.delete("/delete-note/:noteid/:articleid", function(req, res) {
 		var noteId = req.params.noteid;
 		var articleId = req.params.articleid;
 
+		//delete the note itself
 		db.Note.remove({_id: noteId})
 		.then(function(response) {
 			console.log("note deleted")
 
+			//remove deleted note's association with article
 			db.Article.update({_id: articleId}, {$pull: {notes: noteId}})
 			.then(function(response) {
 				console.log("note id deleted from article notes");
