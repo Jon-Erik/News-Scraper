@@ -1,6 +1,6 @@
+//Click event for scraping articles and displaying a modal telling how many
+//new articles were scraped
 $("#scrape-news").on("click", function() {
-
-	//console.log("test")
 	$.ajax({
 		url: "/scrape",
 		method: "GET"
@@ -19,10 +19,12 @@ $("#scrape-news").on("click", function() {
 		});
 });
 
+//event handler for closing scrape modal and reloading page to display new articles 
 $(".dismiss-scraper-modal").on("click", function() {
 	location.reload();
 });
 
+//event handler for saving an article
 $(".save-btn").on("click", function() {
 	var articleId = $(this).data("id");
 	
@@ -34,6 +36,7 @@ $(".save-btn").on("click", function() {
 	});
 });
 
+//event handler for marking article as saved
 $(".delete-saved").on("click", function() {
 	var articleId = $(this).data("id");
 
@@ -44,6 +47,7 @@ $(".delete-saved").on("click", function() {
 	})
 });
 
+//event handler for displaying a modal with an article's notes
 $(".view-notes").on("click", function() {
 	var articleId = $(this).data("id");
 
@@ -52,6 +56,7 @@ $(".view-notes").on("click", function() {
 	$("#notes-modal").modal();
 });
 
+//event handler for adding a note to an article
 $(".add-note").on("click", function() {
 	var newNote = $("textarea.new-note-body").val().trim();
 	var articleId = $(this).attr("articleId");
@@ -73,6 +78,7 @@ $(".add-note").on("click", function() {
 	}
 });
 
+//event handler for deleting a note
 $(document).on("click", ".delete-note", function() {
 	var noteId = $(this).data("noteid");
 	var articleId = $(this).data("articleid");
@@ -86,6 +92,7 @@ $(document).on("click", ".delete-note", function() {
 		});
 });
 
+//function for displaying notes inside a modal
 function displayNotes(articleId) {
 	$.ajax({
 		method: "GET",
