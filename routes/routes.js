@@ -4,7 +4,7 @@ var db = require("../models");
 
 module.exports = function(app) {
 
-	//route for display all articles in the database
+	//route for displaying all articles in the database
 	app.get("/", function(req, res) {
 			db.Article.find({})
 			.then(function(dbArticles) {
